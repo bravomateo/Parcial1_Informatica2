@@ -59,7 +59,7 @@ Una vez explicadas las etapas que se van a tener en cuenta en la solución de es
     \end{figure}
 
 
-\section{Desarrollo} \label{desarrollo}
+\section{Proceso de desarrollo} \label{desarrollo}
 Para llevar a cabo la solución de este reto, lo que se busca es que el carácter que la persona ingrese por el monitor serial, sea reflejado en una matriz de LEDs y que se pueda observar de manera clara. Para ello se debe utilizar el sistema binario, ya que este indica el estado de un LED, donde cero (0) representa apagado y el uno (1) encendido.\\
 
 Teniendo en cuenta lo dicho anteriormente, lo que se va a hacer es mostrar el carácter ingresado, en un arreglo de números en  sistema binario, indicando que LEDs deben encenderse para formar dicho patrón ingresado en la matriz. tal como se muestre en la figura(\textbf{\ref{A}}):
@@ -74,7 +74,28 @@ Teniendo en cuenta lo dicho anteriormente, lo que se va a hacer es mostrar el ca
 
 En la figura(\textbf{\ref{A}}), se puede observar el ejemplo con la letra A. En la matriz de LEDs que está ubicada en la parte izquierda, los números uno que están en color naranja, indican como se va a ver esta letra en la matriz real de LEDs. Por otra parte derecha muestra el arreglo que representa esta letra en sistema binario, el cual es el que se va a procesar por medio del integrado 74HC595. Para realizar este proceso de conversion se hizo uso de una herramineta online de mucha ayuda \cite{riyas}, la cual tiene como fin generar el arreglo en binario para ahorrar tiempo.\\
 
-Después de obtener el arreglo en binario de toda la matriz, lo que se hace es separar cada fila, la cual está hecha con 8 LEDs, razón por la cual se debe formar subgrupos 8 bits  que indican el estado de cada fila. Al realizar esta acción, el arreglo queda con un tamaño de 8 posiciones donde cada espacio representa el estado de una fila de LEDs de la matriz. 
+Después de obtener el arreglo en binario de toda la matriz, lo que se hace es separar cada fila, la cual está hecha con 8 LEDs, razón por la cual se debe formar subgrupos 8 bits  que indican el estado de cada fila. Al realizar esta acción, el arreglo queda con un tamaño de 8 posiciones donde cada espacio representa el estado de una fila de LEDs de la matriz.\\
+
+Después de tener el arreglo bien organizado, se procede a realizar la conversión de binario a decimal de cada posición. Es decir que se va a obtener un arreglo de 8 elementos, donde cada espacio tiene un número decimal. tal como lo muestra la imagen(\textbf{\ref{decbin}})
+
+    \begin{figure}[h]
+    \includegraphics[width=12cm]{decbin.png}
+    \centering
+    \caption{Paso de binario a decimal}
+    \label{decbin}
+    \end{figure}
+    
+Con el vector expresado de esta forma, es más sencillo de llevar el proceso, ya que los números decimales se puede identificar mucho más rápido los errores a la hora de imprimir.
+
+\section{Proceso de montaje Hardware}\label{montaje}
+Como se comentó en la sección \textbf{\ref{analisis}}, para el montaje del hardware se van a utilizar 8 circuitos integrados conectados entre sí. Donde el mecanismo usado para interconectar los, es que el pin de entrada SER del segundo integrado, se conecta con el pin de  salida  Q8 del anterior integrado, formando así una cominucación en serie entre los integrados. Tal como se muestra en la siguiente figura (\textbf{\ref{inter}}).
+
+    \begin{figure}[h]
+    \includegraphics[width=14cm]{inter.jpeg}
+    \centering
+    \caption{Interconexión de integrados}
+    \label{inter}
+    \end{figure}
 
 
 
