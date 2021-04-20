@@ -5,6 +5,7 @@
 \usepackage{graphicx}
 \graphicspath{ {images/} }
 \usepackage{cite}
+\usepackage{hyperref}
 
 \begin{document}
 
@@ -97,8 +98,22 @@ Como se comentó en la sección \textbf{\ref{analisis}}, para el montaje del har
     \label{inter}
     \end{figure}
 
+\section{Prblemas obtenidos}\label{problem}
+En esta sección se habla sobre los errores y problemas que se tuvo a la hora de realizar el desafío, con el fin de ponerlos al conocimiento del estudiantado para aprender a trabajar y solucionar en momentos de crisis, o bajo presión.
 
+En primer lugar, el problema más notable que se obtuvo está relacionado con los repositorios, donde al momento de crear un repositorio compartido el día domingo 18 de abril del 2021,se subieron unos documentos de prueba para verificar el uso de esta herramienta. Tiempo después se intentó  realizar commits, pero siempre se encontraban problemas con la sincronización de repositorios, arrojando errores respecto realizar un git pull,ver figura (\textbf{\ref{repoerror}}).
 
+    \begin{figure}[h]
+    \includegraphics[width=15cm]{Error1.jpeg}
+    \centering
+    \caption{Error de repositorios}
+    \label{repoerror}
+    \end{figure}
+    
+Se intentó arreglar este error buscando en diversas fuentes, distintas soluciones, utilizando comandos tales como, git pull remote, git fetch, git merge, incluso se optó por borrar a los contribuidores con el fin de que no intervinieran más, pero la respuesta siguió siendo negativa,razón por la que se dejó de lado el repositorio  \url{https://github.com/bravomateo/Parcial1.git} . Dado esta circuntancia , se tomó la iniciativa de crear un nuevo repositorio el día lunes 19 de abril sin tener ningun colaborador , para evitar tener este problema y poder continuar con el desarrollo del reto.Este problema del repositorio tuvo un fuerte impacto porque tuvo un costo de mucho tiempo. 
+ 
+    
+    
 \bibliographystyle{IEEEtran}
 \bibliography{references}
 
