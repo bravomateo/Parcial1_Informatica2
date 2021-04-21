@@ -89,7 +89,7 @@ Después de tener el arreglo bien organizado, se procede a realizar la conversi�
 Con el vector expresado de esta forma, es más sencillo de llevar el proceso, ya que los números decimales se puede identificar mucho más rápido los errores a la hora de imprimir.
 
 \section{Proceso de montaje Hardware}\label{montaje}
-Como se comentó en la sección \textbf{\ref{analisis}}, para el montaje del hardware se van a utilizar 8 circuitos integrados conectados entre sí. Donde el mecanismo usado para interconectar los, es que el pin de entrada SER del segundo integrado, se conecta con el pin de  salida  Q8 del anterior integrado, formando así una cominucación en serie entre los integrados. Tal como se muestra en la siguiente figura (\textbf{\ref{inter}}).
+Como se comentó en la sección \textbf{\ref{analisis}}, para el montaje del hardware se van a utilizar 8 circuitos integrados conectados entre sí. Donde el mecanismo usado para interconectar los, es que el pin de entrada SER del segundo integrado, se conecta con el pin de  salida  QH' del anterior integrado, formando así una cominucación en serie entre los integrados. Tal como se muestra en la siguiente figura (\textbf{\ref{inter}}).
 
     \begin{figure}[h]
     \includegraphics[width=14cm]{inter.jpeg}
@@ -97,6 +97,147 @@ Como se comentó en la sección \textbf{\ref{analisis}}, para el montaje del har
     \caption{Interconexión de integrados}
     \label{inter}
     \end{figure}
+
+Se ha conectado 8 leds por cada circuito integrado (74HC595) donde cada configuración por CI representa una fila de nuestra matriz 8X8 de LEDs. 
+Lo que se hace es conectar el terminal positivo (ánodo) de un LED en serie con una resistencia (470 ohm) por cada salida Qi de los CI (desde Qa hasta Qh),  y la salida Qh’ se interconecta con la entrada SER del siguiente circuito integrado.Por otra parte, los terminales negativos que quedan libres en cada LED se interconectan y son enviados a GND (tierra común), este proceso se repite por cada CI  hasta tener una configuración de 8 circuitos integrados y se acomoda cada fila una debajo de la otra para formar una matriz 8x8 de Leds tal como se muestra en la figura (\textbf{\ref{montaje5}}).
+
+
+    \begin{figure}[h]
+    \includegraphics[width=14cm]{montaje5.jpeg}
+    \centering
+    \caption{Matriz de LEDs funcionando}
+    \label{montaje5}
+    \end{figure}
+    
+Cabe resaltar que para este primer prototipo se realiza el montaje y la interconexión de los componentes en el aire por facilidad y también para  obtener los primeros resultados de prueba. En los siguientes prototipos se mejorará el montaje para organizar más el circuito.\\
+
+
+Para poder mostrar el número 5 en la matriz de LEDs , se debe programar el Arduino.A continuación, se presenta el código, que permite realizar la accion mostrada en la figura(\textbf{\ref{montaje5}}).
+
+
+\begin{lstlisting}[language=arduino, label=print5]
+
+cconst int SER = 2;
+const int RCLK = 3;
+const int SRCLK = 4;
+
+
+char TECLA;
+
+void ledon(int);
+
+void prueba();
+
+void setup()
+{
+  
+  
+  Serial.begin(9600);
+  
+  pinMode(SER , OUTPUT);
+  pinMode(RCLK , OUTPUT);
+  pinMode(SRCLK , OUTPUT);
+ 
+  digitalWrite(SER , 0);
+  digitalWrite(RCLK , 0);
+  digitalWrite(SRCLK , 0);
+ 
+  
+  prueba1(); // Muestra el patron 5 
+  
+}
+
+  
+void loop(){
+
+}
+
+
+void ledOn(int n){
+  
+  	/*
+    
+    Funcion que enciende una fila del arreglo de LEDS
+    segun n
+    
+    El parametro de entrada (n) es un entero que se convierte
+    a binario para generar datos a la entrada SER
+
+    
+    */
+    int b;
+  	for (int i = 0 ; i < 8 ; i++){
+    b = n%2;
+    n = n/2;
+    
+     //[paso 1]
+    digitalWrite(SER ,b);
+
+    // [Paso 2] 
+    digitalWrite(SRCLK , 0);
+    digitalWrite(SRCLK , 1);
+    digitalWrite(SRCLK , 0);
+
+    // [Paso 3]
+    digitalWrite(RCLK , 0);
+    digitalWrite(RCLK , 1);
+    digitalWrite(RCLK , 0);
+  }
+}
+
+
+void prueba1(){
+  
+    /* Funcion que muestra el numero 5 en un patron de LEDS*/
+  
+  int p1[8] = {126,255,199,7,254,224,255,255};
+  
+  for (int k = 0; k < 8; k++){
+    ledOn(*(p1+k));
+  }
+}
+
+
+void verificacion(){ 
+  
+  /* Funcion que verifica que todos 
+  los LEDS esten encendidos*/
+  
+  int p2[8] = {255,255,255,255,255,255,255,255};
+  
+  for (int k = 0; k < 8; k++){
+    ledOn(*(p2+k));
+  }
+}
+
+\end{lstlisting}
+
+Donde se puede apreciar que tiene 2 funciones principales.
+
+\begin{itemize}
+    \item \textbf{ void ledOn()}: Función encargada de encender una fila del arreglo de LEDs , a partir del parámetro de entrada \textbf{n} el cual es un número entero que es convertido a binario para generar el arreglo que será procesada por la entrada SER.
+    \item \textbf{void verificacion()}:Función la cual le permitirá al usuario verificar que todos los LEDs que están conformando la matriz 8x8 estén funcionando correctamente  y así no haya algún tipo de inconveniente al momento de generar el patrón que el usuario desee formar con los LEDs. Para esto básicamente se debe encender los 64 leds y así cerciorarce de que  cada uno está trabajando.
+    
+\end{itemize}
+\\
+
+\begin{lstlisting}[language=arduino, label=pruebaON]
+void verificacion(){ 
+  
+  /* Funcion que verifica que todos 
+  los LEDS esten encendidos*/
+  
+  int p2[8] = {255,255,255,255,255,255,255,255};
+  
+  for (int k = 0; k < 8; k++){
+    ledOn(*(p2+k));
+  }
+}
+\end{lstlisting}
+
+Por ejemplo para el código \ref{pruebaON}, se crea un arreglo tipo entero de 8 posiciones donde cada posición tiene almacenado un número decimal el cual representa una de las 8 filas de la matriz de leds, en este caso tenemos el número decimal 255 en las 8 posiciones del arreglo p2[8], ya que este número al convertirlo a binario con la función ledOn  representa el número binario 11111111(lo cual significa que se tiene encendidos los 8 LEDs de esa fila) y así sucesivamente se realiza este proceso con el ciclo For 8 veces, al  terminar este ciclo se tiene encendidos los 8 leds de las 8 filas, el cual representa la matriz 8x8 de LEDs encendidos todos.\\
+
+Este proceso es de vital importancia dado que es la base de como se va a imprimir todas las letras y el patrón que ingrese el usuario.
 
 \section{Prblemas obtenidos}\label{problem}
 En esta sección se habla sobre los errores y problemas que se tuvo a la hora de realizar el desafío, con el fin de ponerlos al conocimiento del estudiantado para aprender a trabajar y solucionar en momentos de crisis, o bajo presión.
@@ -110,10 +251,11 @@ En primer lugar, el problema más notable que se obtuvo está relacionado con lo
     \label{repoerror}
     \end{figure}
     
-Se intentó arreglar este error buscando en diversas fuentes, distintas soluciones, utilizando comandos tales como, git pull remote, git fetch, git merge, incluso se optó por borrar a los contribuidores con el fin de que no intervinieran más, pero la respuesta siguió siendo negativa,razón por la que se dejó de lado el repositorio  \url{https://github.com/bravomateo/Parcial1.git} . Dado esta circuntancia , se tomó la iniciativa de crear un nuevo repositorio el día lunes 19 de abril sin tener ningun colaborador , para evitar tener este problema y poder continuar con el desarrollo del reto.Este problema del repositorio tuvo un fuerte impacto porque tuvo un costo de mucho tiempo. 
- 
-    
-    
+Se intentó arreglar este error buscando en diversas fuentes, distintas soluciones, utilizando comandos tales como, git pull remote, git fetch, git merge, incluso se optó por borrar a los contribuidores con el fin de que no intervinieran más, pero la respuesta siguió siendo negativa,razón por la que se dejó de lado el repositorio  \url{https://github.com/bravomateo/Parcial1.git} . Dado esta circuntancia , se tomó la iniciativa de crear un nuevo repositorio el día lunes 19 de abril sin tener ningun colaborador , para evitar tener este problema y poder continuar con el desarrollo del reto.Este problema del repositorio tuvo un fuerte impacto porque tuvo un costo de mucho tiempo.\\
+
+
+
+
 \bibliographystyle{IEEEtran}
 \bibliography{references}
 
