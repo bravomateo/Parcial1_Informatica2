@@ -237,7 +237,17 @@ void verificacion(){
 
 Por ejemplo para el código \ref{pruebaON}, se crea un arreglo tipo entero de 8 posiciones donde cada posición tiene almacenado un número decimal el cual representa una de las 8 filas de la matriz de leds, en este caso tenemos el número decimal 255 en las 8 posiciones del arreglo p2[8], ya que este número al convertirlo a binario con la función ledOn  representa el número binario 11111111(lo cual significa que se tiene encendidos los 8 LEDs de esa fila) y así sucesivamente se realiza este proceso con el ciclo For 8 veces, al  terminar este ciclo se tiene encendidos los 8 leds de las 8 filas, el cual representa la matriz 8x8 de LEDs encendidos todos.\\
 
-Este proceso es de vital importancia dado que es la base de como se va a imprimir todas las letras y el patrón que ingrese el usuario.
+Este proceso es de vital importancia dado que es la base de como se va a imprimir todas las letras y el patrón que ingrese el usuario.\\
+
+En la figura (\textbf{\ref{circuito}} se muestra como se modificó el montaje de Tinkercad, ya que anteriormente se tenía el montaje en el aire, esto porque es más fácil visualizar cualquier error de falla de conexión. No obtasnte, ya pusimos a prueba el sistema tanto en programación como en hardware. Entonces ya se realizó el montaje en una protoboard
+
+    \begin{figure}[h]
+    \includegraphics[width=11cm]{monaje.jpeg}
+    \centering
+    \caption{Montaje final hardware}
+    \label{circuito}
+    \end{figure}
+
 
 \section{Prblemas obtenidos}\label{problem}
 En esta sección se habla sobre los errores y problemas que se tuvo a la hora de realizar el desafío, con el fin de ponerlos al conocimiento del estudiantado para aprender a trabajar y solucionar en momentos de crisis, o bajo presión.
@@ -251,7 +261,7 @@ En primer lugar, el problema más notable que se obtuvo está relacionado con lo
     \label{repoerror}
     \end{figure}
     
-Se intentó arreglar este error buscando en diversas fuentes, distintas soluciones, utilizando comandos tales como, git pull remote, git fetch, git merge, incluso se optó por borrar a los contribuidores con el fin de que no intervinieran más, pero la respuesta siguió siendo negativa,razón por la que se dejó de lado el repositorio  \url{https://github.com/bravomateo/Parcial1.git} . Dado esta circuntancia , se tomó la iniciativa de crear un nuevo repositorio el día lunes 19 de abril sin tener ningun colaborador , para evitar tener este problema y poder continuar con el desarrollo del reto.Este problema del repositorio tuvo un fuerte impacto porque tuvo un costo de mucho tiempo.\\
+Se intentó arreglar este error buscando en diversas fuentes, distintas soluciones, utilizando comandos tales como, git pull remote, git fetch, git merge, incluso se optó por borrar a los contribuidores con el fin de que no intervinieran más, pero la respuesta siguió siendo negativa,razón por la que se dejó de lado el repositorio\\ \url{https://github.com/bravomateo/Parcial1.git} . Dado esta circuntancia , se tomó la iniciativa de crear un nuevo repositorio el día lunes 19 de abril sin tener ningun colaborador , para evitar tener este problema y poder continuar con el desarrollo del reto.Este problema del repositorio tuvo un fuerte impacto porque tuvo un costo de mucho tiempo.\\
 
 
 
