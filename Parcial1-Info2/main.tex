@@ -325,6 +325,27 @@ void verificacion(){
 }
 \end{lstlisting}
 
+En última instancia sé realizaron unos cambios para utilizar memoria dinámica en cada carácter, con el fin de que una vez usado un arreglo, se borre del programa y así se obtenga mejor rendimiento y más eficiencia en el uso de la memoria,tal como se observa en el código \ref{memoria dinamica}
+
+
+
+\begin{lstlisting}[language=arduino, label=memoria dinamica]
+
+else if (n == 56) {
+    //numero 8
+    p_a = new int[8];
+    p_a[0] = 60; p_a[1] = 66; p_a[2] = 66;
+    p_a[3] = 60; p_a[4] = 60; p_a[5] = 66;
+    p_a[6] = 66; p_a[7] = 60;
+    for (int i=0; i<8; i++){
+    	ledOn(*(p_a+i));
+    }
+    delete[] p_a;
+}
+\end{lstlisting}
+
+Este código se implementa con cada uno de los caracteres que tiene el problema, y se realza la selección mediante un condicional para poder hace que solo se cree el areglo que se requiere y no todos los posibles arreglos de el sistema alfa-numérico como toca hacerlo con un switch-case
+
 \section{Problemas obtenidos}\label{problem}
 En esta sección se habla sobre los errores y problemas que se tuvo a la hora de realizar el desafío, con el fin de ponerlos al conocimiento del estudiantado para aprender a trabajar y solucionar en momentos de crisis, o bajo presión.
 
@@ -339,8 +360,9 @@ En primer lugar, el problema más notable que se obtuvo está relacionado con lo
     
 Se intentó arreglar este error buscando en diversas fuentes, distintas soluciones, utilizando comandos tales como, git pull remote, git fetch, git merge, incluso se optó por borrar a los contribuidores con el fin de que no intervinieran más, pero la respuesta siguió siendo negativa,razón por la que se dejó de lado el repositorio\\ \url{https://github.com/bravomateo/Parcial1.git} . Dado esta circuntancia , se tomó la iniciativa de crear un nuevo repositorio el día lunes 19 de abril sin tener ningun colaborador , para evitar tener este problema y poder continuar con el desarrollo del reto.Este problema del repositorio tuvo un fuerte impacto porque tuvo un costo de mucho tiempo.\\
 
+Otro problema que se obtuvo esta relacionado con confusiones en el código, dado que al tener varias versiones del mismo, se producían errores distintos en cada uno y cuando se descargaban 2 versiones del código, no se sabía cuál era  el indicado para realizar el siguiente commit.
 
-
+Y por último, un problema bastante tedioso que se obtuvo, está relacionado con la memoria dinámica, ya que al implementarla en Arduino se obtuvo muchos errores, ya que queríamos usarla con punteros previamente definidos, razón por la cual toco especificar  que valor se deseaba tener en cada posición del arreglo y no se pudo realizar en un mismo paso a la hora de declararlo (ver código \ref{memoria dinamica}.
 
 \bibliographystyle{IEEEtran}
 \bibliography{references}

@@ -1,41 +1,45 @@
-const int SER = 2;
-const int RCLK = 3;
-const int SRCLK = 4;
 
-int *cantidad;
-int *p_a;
+/* Dar nombre a los pines*/
+                   // ARDUINO -> HC595 
+const int SER = 2;  // pin 2  -> SER (PIN 14)
+const int RCLK = 3; // pin 3  -> RCLK (PIN 12)
+const int SRCLK = 4;// pin 4  -> SRCLK (PIN 11)
+
+
+int *p_a; // crear puntero
+
+// prototipo de funciones
 
 void ledOn(int); 
-// Enciende los leds de una fila segun la entrada
-// de un numero decimal
+// Funcion que enceinde una fila de Leds 
+//segun la entrada (numero decimal) 
 
 void prueba1();
+// Funcion que permite ver el patron "5"
 
+void imagen(int); // funcion que permite ver un patron en el arreglo de leds
 
-void imagen(int);
-
-void publik(int);
+void publik(int); // funcion que permite ver una secuencia de patrones 
 
 
 void setup()
 {
   
-  Serial.begin(9600);
+  Serial.begin(9600); // Establece los baudios para la transmisión de datos en serie.
+  
   
   // Poner en modo salida los pines digitales
-  
   pinMode(SER , OUTPUT);
   pinMode(RCLK , OUTPUT);
   pinMode(SRCLK , OUTPUT);
   
-   // Inicilaizar salidas digitales en 0
- 
+  
+  // Inicilaizar salidas digitales en 0
   digitalWrite(SER , 0); 
   digitalWrite(RCLK , 0);
   digitalWrite(SRCLK , 0);
   
-  // Imprimir el menu en el monitor
-  
+  // Imprimir el menu en el monitor en serie
   Serial.println("MENU DE INICIO");
   Serial.println("1. Dibujar el patron 5");
   Serial.println("2. Probar funcionamiento de todos los leds");
@@ -45,24 +49,28 @@ void setup()
   Serial.println(" ");
   
   
-  while(Serial.available()==0){}
+  while(Serial.available()==0){} // Permite ingresar datos al usuario
     
   int ENTRADA = Serial.parseInt(); // lee un entero 
   Serial.print("Su elecciones fue: ");
   Serial.println(ENTRADA);
   
-  
+  /*
+  Verificacion de entradas del usuario
+  */
   
   if (ENTRADA == 1){
-    // Ingresa a verificar el patron 5 
-    prueba1();
+    
+	// Ingresa a verificar el patron 5 
+	prueba1();
   }
   
   else if(ENTRADA == 2){
+	  
     // Ingresa a realizar la verifiacion
     // que todos los LEDS esten encnendidos
-    
     verificacion();
+	
   }
   
   else if(ENTRADA == 3){
@@ -71,28 +79,27 @@ void setup()
 
     // pedir al usuario un caracter para ser
     // visualizado
-    
     Serial.println("Ingrese un caracter para mostrar el patron: ");
     while(Serial.available()==0){}
-    
-  	int ENTRADA3 = Serial.read(); // lee ascii 
-  	//Serial.println("Su caracter ingresado fue: ");
-  	//Serial.println(ENTRADA3);
-    
-    imagen(ENTRADA3); // A - > 65  caso 1 = A 65-64 -> 1 
-
+  	int ENTRADA3 = Serial.read(); // lee ascii y le asigna el valor en ascci
+	
+    // A -> 65 o  1-> 49
+	
+    imagen(ENTRADA3); 
     
   }
   
   if(ENTRADA == 4){
-    // Pide al usuario que le ingrese una palabra para ser
-    // mostrada secuencialmente, el tiempo entre patron y 
-    // patron lo define el usuario y la variable se llama
-    // TIEMPO
+	  
+    // Solicita al usuario que le ingrese una palabra
+	// el tiempo entre patron y patron 
+	
 	Serial.println("");
     Serial.print("Ingrese el tiempo de duracion en segundos: ");
     while(Serial.available()==0){}
-    int SEGU = Serial.parseInt(); 
+	
+	
+    int SEGU = Serial.parseInt(); // SEGU = tiempo en segundos 
   
 	publik(SEGU);
     
@@ -105,6 +112,7 @@ void loop(){
 }
 
 
+
 // Funciones de nuestro programa
 
 void ledOn(int n){
@@ -114,32 +122,33 @@ void ledOn(int n){
     Funcion que enciende una fila del arreglo de LEDS
     segun n
     
-    El parametro de entrada (n) es un entero que se convierte
+    El parametro de entrada (n) es un entero que se convierte   -> 1
     a binario para generar datos a la entrada SER
     
-    -> Si n = 221  (Un ejemplo particular)
-       el binario es 11011101 donde 1 es enecendido y 0 apagado
-    
-    
+    -> Si n = 158 (Un ejemplo particular)
+       el binario es 10011110 
+	   Qa = 1  Qb = 0  Qc = 0  Qd = 1  Qe = 1   Qf = 1  Qg = 1   Qh = 0
     */
   
     int b;
+	
   	for (int i = 0 ; i < 8 ; i++){
-    b = n%2;
+    b = n%2; // residuo para extraer bits
     n = n/2;
     
      //[paso 1]
-    digitalWrite(SER ,b); // envia la informacion del bit menos
+    digitalWrite(SER ,b); // envia la informacion del bit menos // 0 1 1 1 1 0 0 1 -> 
+          //	00000000 - 10000000 - 11000000 -11100000 -11110000- 01111000 - 00111100 - 10011110 ->  10011110
                          //significativo al mas significativo
 
     // [Paso 2] 
     digitalWrite(SRCLK , 0);
-    digitalWrite(SRCLK , 1);
+    digitalWrite(SRCLK , 1); // Se flaque la entrada SRCLK = 4
     digitalWrite(SRCLK , 0);
 
     // [Paso 3]
     digitalWrite(RCLK , 0);
-    digitalWrite(RCLK , 1);
+    digitalWrite(RCLK , 1);  // Se flanquea la entrada RCLK = 3
     digitalWrite(RCLK , 0);
   }
 }
@@ -147,7 +156,7 @@ void ledOn(int n){
 
 void prueba1(){
   
-    /* Funcion que muestra el numero 5 en un patron de LEDS*/
+  /* Funcion que muestra el numero 5 en un patron de LEDS*/
   
   int p1[8] = {126,255,199,7,254,224,255,255};
   
@@ -159,21 +168,24 @@ void prueba1(){
 
 void verificacion(){
 
-  /* Funcion que verifica que todos
-  los LEDS esten encendidos*/
+	/* Funcion que verifica que todos
+	los LEDS funcionen, enciende todos los leds*/
 
-    cantidad = new int[8];
+    p_a = new int[8]; //reservar memoria para un arreglo de 8 posiciones 
     
-    cantidad[0] = 60;cantidad[1] = 66; cantidad[2] = 66;
-    cantidad[3] = 60;cantidad[4] = 60; cantidad[5] = 66;
-    cantidad[6] = 66; cantidad[7] = 60;
+	/* Asiganacion a cada posicion del arreglo 
+	un numero decimal */
+	
+    p_a[0] = 255; p_a[1] = 255; p_a[2] = 255; // 255 -> 11111111 -> 
+    p_a[3] = 255; p_a[4] = 255; p_a[5] = 255;
+    p_a[6] = 255; p_a[7] = 255;
     
 
     for (int i=0; i<8; i++){
-      		ledOn(*(cantidad+i));
+      		ledOn(*(p_a+i));
         }
     
-    delete[] cantidad;
+    delete[] p_a;
 
 }
 
@@ -181,9 +193,10 @@ void verificacion(){
 void imagen(int n){
 
 
-
+	// n representa en ascci un carcter ingresado
 	
-	if (n == 65 || n == 97) {
+	
+	if (n == 65 || n == 97) {  // LETRA A o a
 		
 		p_a = new int[8];
 		p_a[0] = 195; p_a[1] = 195; p_a[2] = 195;
@@ -197,7 +210,7 @@ void imagen(int n){
 		delete[] p_a;	
 	}
 	
-	else if (n == 66 || n == 98) {
+	else if (n == 66 || n == 98) {  // LETRA B o n
 		
 		p_a = new int[8];
 		p_a[0] = 124; p_a[1] = 66; p_a[2] = 66;
@@ -408,7 +421,6 @@ void imagen(int n){
 	}
 	
 		else if (n == 81 || n == 113) {
-		//Letra Q o q
 		p_a = new int[8];
 		p_a[0] = 1; p_a[1] = 126; p_a[2] = 70;
 		p_a[3] = 74; p_a[4] = 66; p_a[5] = 66;
@@ -422,7 +434,7 @@ void imagen(int n){
 	}
 	
 		else if (n == 82 || n == 114) {
-		//Letra R p r
+
 		p_a = new int[8];
 		p_a[0] = 204; p_a[1] = 216; p_a[2] = 240;
 		p_a[3] = 252; p_a[4] = 198; p_a[5] = 198;
@@ -436,7 +448,7 @@ void imagen(int n){
 	}
 	
 		else if (n == 83 || n == 115) {
-		//letra S o s
+
 		p_a = new int[8];
 		p_a[0] = 60; p_a[1] = 126; p_a[2] = 6;
 		p_a[3] = 62; p_a[4] = 124; p_a[5] = 96;
@@ -450,7 +462,7 @@ void imagen(int n){
 	}
 	
 		else if (n == 84 || n == 116) {
-		//Letra T o t 
+
 		p_a = new int[8];
 		p_a[0] = 24; p_a[1] = 24; p_a[2] = 24;
 		p_a[3] = 24; p_a[4] = 24; p_a[5] = 24;
@@ -464,7 +476,7 @@ void imagen(int n){
 	}
 	  	
 		else if (n == 85 || n == 117) {
-		//letra U 
+	
 		p_a = new int[8];
 		p_a[0] = 255 ; p_a[1] = 255; p_a[2] = 195;
 		p_a[3] = 195; p_a[4] = 195; p_a[5] =195;
@@ -478,7 +490,7 @@ void imagen(int n){
 	}
 	
 		else if (n == 86 || n == 118) {
-		//letra V v
+
 		p_a = new int[8];
 		p_a[0] = 24; p_a[1] = 60; p_a[2] = 102;
 		p_a[3] = 195; p_a[4] = 195; p_a[5] =195;
@@ -492,7 +504,7 @@ void imagen(int n){
 	}
 	
 		else if (n == 87 || n == 119) {
-		//letra w W
+	
 		p_a = new int[8];
 		p_a[0] = 60; p_a[1] = 126; p_a[2] = 219;
 		p_a[3] = 219; p_a[4] = 219; p_a[5] = 195;
@@ -506,7 +518,7 @@ void imagen(int n){
 	}
 	
 		else if (n == 88 || n == 120) {
-		//letra x o X
+
 		p_a = new int[8];
 		p_a[0] = 195; p_a[1] = 102; p_a[2] = 60;
 		p_a[3] = 24; p_a[4] = 60; p_a[5] = 102;
@@ -521,7 +533,6 @@ void imagen(int n){
 	}
   
   		else if (n == 89 || n == 121) {
-		//letra y o Y
 		p_a = new int[8];
 		p_a[0] = 24; p_a[1] = 24; p_a[2] = 24;
 		p_a[3] = 24; p_a[4] = 60; p_a[5] = 102;
@@ -556,7 +567,7 @@ void imagen(int n){
 	// numeros 
 	
 	else if (n == 48) {
-		
+		// numero 1
 		p_a = new int[8];
 		p_a[0] = 126; p_a[1] = 66; p_a[2] = 66;
 		p_a[3] = 66; p_a[4] = 66; p_a[5] = 66;
@@ -679,7 +690,7 @@ void imagen(int n){
 	}
   
     else if (n == 57 ) {
-		
+		// numero 9
 		p_a = new int[8];
 		p_a[0] = 126; p_a[1] = 2; p_a[2] = 2;
 		p_a[3] = 126; p_a[4] = 66; p_a[5] = 66;
@@ -693,7 +704,7 @@ void imagen(int n){
 		delete[] p_a;	
 	}
     else {
-		
+		// muestra un signo de interrrogacion
 		p_a = new int[8];
 		p_a[0] = 24; p_a[1] = 0; p_a[2] = 24;
 		p_a[3] = 12; p_a[4] = 6; p_a[5] = 102;
@@ -714,25 +725,30 @@ void imagen(int n){
 
 
 void publik(int SEG){
+	
+	/*
+	Recibe como parametros de entras un entero que represeta el tiempo
+	*/
 
-    int TIEMPO = SEG*1000; 
+    int TIEMPO = SEG*1000;  // 1 seg o 
     
 	Serial.println("Ingrese la cadena: ");
   	while(Serial.available()==0){}
   
-  	int len = 20;
-  	char buffer[len] = {0};
+  	int len = 20; // a cadema a lo sumo tiene 20 carac. 
+  	char buffer[len] = {0}; // creamos un arreglo vacio
   
-  	int a = Serial.readBytes(buffer,len); // ->> HOLA a = 4
+  	int a = Serial.readBytes(buffer,len); // ->> HOLA a = 4 HOLA
   	Serial.print("Su cadena es = ");
   	Serial.println(buffer);
  
     
   	for(int i=0; i< a; i++){
-      imagen(buffer[i]);
+      imagen(*(buffer+i)); // con buffer[i] se extrea caracter a caracter en ascci HOLA -> H -> 72  O -> 79
       delay(TIEMPO);
     }
 }
+
 
 
 
