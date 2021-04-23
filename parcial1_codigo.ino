@@ -17,7 +17,6 @@ void publik(int);
 void setup()
 {
   
-  
   Serial.begin(9600);
   
   // Poner en modo salida los pines digitales
@@ -36,10 +35,11 @@ void setup()
   
   Serial.println("MENU DE INICIO");
   Serial.println("1. Dibujar el patron 5");
-  Serial.println("2. Encender todos los leds");
-  Serial.println("3. Mostrar un patron a su eleccion");
-  Serial.println("4. Mostrar una cadena de patrones a su eleccion");
+  Serial.println("2. Probar funcionamiento de todos los leds");
+  Serial.println("3. Mostrar un patron escribiendo un caracter de su teclado");
+  Serial.println("4. Mostrar una secuencia de patrones diferentes");
   Serial.println("Seleccione una opcion: ");
+  Serial.println(" ");
   
   
   while(Serial.available()==0){}
@@ -63,8 +63,8 @@ void setup()
   }
   
   else if(ENTRADA == 3){
-    
-    
+   
+    Serial.println("");
 
     // pedir al usuario un caracter para ser
     // visualizado
@@ -73,10 +73,10 @@ void setup()
     while(Serial.available()==0){}
     
   	int ENTRADA3 = Serial.read(); // lee ascii 
-  	Serial.println("Su caracter ingresado fue: ");
-  	Serial.println(ENTRADA3);
+  	//Serial.println("Su caracter ingresado fue: ");
+  	//Serial.println(ENTRADA3);
     
-    imagen(ENTRADA3-64); // A - > 65  caso 1 = A 65-64 -> 1 
+    imagen(ENTRADA3); // A - > 65  caso 1 = A 65-64 -> 1 
 
     
   }
@@ -86,7 +86,7 @@ void setup()
     // mostrada secuencialmente, el tiempo entre patron y 
     // patron lo define el usuario y la variable se llama
     // TIEMPO
-
+	Serial.println("");
     Serial.print("Ingrese el tiempo de duracion en segundos: ");
     while(Serial.available()==0){}
     int SEGU = Serial.parseInt(); 
@@ -179,7 +179,7 @@ void imagen(int n){
     matriz de LEDS
     */
   
-    int vacio[8] = {255,255,0,0,0,0,255,255};      
+	int vacio[8] = {24,0,24,12,6,102,126,60};      
     int A[8] = {195,195,195,255,255,195,66,60};
     int B[8] = {124,66,66,124,124,66,66,124};
     int C[8] = {126,254,224,224,224,224,254,126};
@@ -206,141 +206,232 @@ void imagen(int n){
     int X[8] = {195,102,60,24,60,102,195,129};
   	int Y[8] = {24,24,24,24,60,102,195,195};
     int Z[8] = {255,127,48,24,12,6,255,255};
+	int n0[8] = {126,66,66,66,66,66,66,126};
+	int n1[8] = {255,255,12,12,12,108,60,28};
+	int n2[8] = {126,126,48,24,12,38,62,28};
+	int n3[8] = {124,124,2,28,28,2,124,124};
+	int n4[8] = {6,6,255,198,102,54,30,14};
+	int n5[8] = {124,2,2,2,124,64,64,126};
+	int n6[8] = {60,102,102,102,124,96,98,60};
+	int n7[8] = {4,4,4,63,4,4,4,124};
+	int n8[8] = {60,66,66,60,60,66,66,60};
+	int n9[8] = {126,2,2,126,66,66,66,126};
+
 
     switch (n) {
 
-    case 1:
+    case 65:
         for (int k = 0; k < 8; k++){
           ledOn(*(A+k));
         }
         break;
       
-      
-    case 2:
+    case 66:
         for (int k = 0; k < 8; k++){
           ledOn(*(B+k));
         }
         break;
-    case 3:
+		
+    case 67:
         for (int k = 0; k < 8; k++){
           ledOn(*(C+k));
         }
         break;
-    case 4:
+		
+    case 68:
         for (int k = 0; k < 8; k++){
           ledOn(*(D+k));
         }
         break;
       
-    case 5:
+    case 69:
         for (int k = 0; k < 8; k++){
           ledOn(*(E+k));
         }
         break; 
       
-    case 6:
+    case 70:
         for (int k = 0; k < 8; k++){
           ledOn(*(F+k));
         }
         break;
-    case 7:
+		
+    case 71:
         for (int k = 0; k < 8; k++){
           ledOn(*(G+k));
         }
         break;
-    case 8:
+		
+    case 72:
         for (int k = 0; k < 8; k++){
           ledOn(*(H+k));
         }
         break;
-    case 9:
+		
+    case 73:
         for (int k = 0; k < 8; k++){
           ledOn(*(I+k));
         }
         break;
-    case 10:
+		
+    case 74:
         for (int k = 0; k < 8; k++){
           ledOn(*(J+k));
         }
         break;
-    case 11:
+		
+    case 75:
         for (int k = 0; k < 8; k++){
           ledOn(*(K+k));
         }
         break;
-    case 12:
+		
+    case 76:
         for (int k = 0; k < 8; k++){
           ledOn(*(L+k));
         }
         break;
-    case 13:
+		
+    case 77:
         for (int k = 0; k < 8; k++){
           ledOn(*(M+k));
         }
         break;
-    case 14:
+		
+    case 78:
         for (int k = 0; k < 8; k++){
           ledOn(*(N+k));
         }
-        break;   
-    case 15:
+        break;
+		
+    case 79:
         for (int k = 0; k < 8; k++){
           ledOn(*(O+k));
         }
-        break;    
-    case 16:
+        break;
+		
+    case 80:
         for (int k = 0; k < 8; k++){
           ledOn(*(P+k));
         }
         break;
-    case 17:
+    
+	case 81:
         for (int k = 0; k < 8; k++){
           ledOn(*(Q+k));
         }
         break;
-    case 18:
+    
+	case 82:
         for (int k = 0; k < 8; k++){
           ledOn(*(R+k));
         }
         break;
-    case 19:
+    
+	case 83:
         for (int k = 0; k < 8; k++){
           ledOn(*(S+k));
         }
         break;   
-    case 20:
+    
+	case 84:
         for (int k = 0; k < 8; k++){
           ledOn(*(T+k));
         }
         break;    
-    case 21:
+    
+	case 85:
         for (int k = 0; k < 8; k++){
           ledOn(*(U+k));
         }
         break;
-    case 22:
+    
+	case 86:
         for (int k = 0; k < 8; k++){
           ledOn(*(V+k));
         }
         break;
-    case 23:
+    
+	case 87:
         for (int k = 0; k < 8; k++){
           ledOn(*(W+k));
         }
         break;
-    case 24:
+    
+	case 88:
         for (int k = 0; k < 8; k++){
           ledOn(*(X+k));
         }
         break;
-    case 25:
+    
+	case 89:
         for (int k = 0; k < 8; k++){
           ledOn(*(Y+k));
         }
         break;
-    case 26:
+    
+	case 90:
         for (int k = 0; k < 8; k++){
           ledOn(*(Z+k));
+        }
+        break;
+    
+	case 48:
+        for (int k = 0; k < 8; k++){
+          ledOn(*(n0+k));
+        }
+        break;
+		
+	case 49:
+        for (int k = 0; k < 8; k++){
+          ledOn(*(n1+k));
+        }
+        break;
+		
+	case 50:
+        for (int k = 0; k < 8; k++){
+          ledOn(*(n2+k));
+        }
+        break;
+		
+	case 51:
+        for (int k = 0; k < 8; k++){
+          ledOn(*(n3+k));
+        }
+        break;
+	
+	case 52:
+        for (int k = 0; k < 8; k++){
+          ledOn(*(n4+k));
+        }
+        break;
+      	case 53:
+        for (int k = 0; k < 8; k++){
+          ledOn(*(n5+k));
+        }
+        break;
+		
+	case 54:
+        for (int k = 0; k < 8; k++){
+          ledOn(*(n6+k));
+        }
+        break;
+		
+	case 55:
+        for (int k = 0; k < 8; k++){
+          ledOn(*(n7+k));
+        }
+        break;
+		
+	case 56:
+        for (int k = 0; k < 8; k++){
+          ledOn(*(n8+k));
+        }
+        break;
+		
+	case 57:
+        for (int k = 0; k < 8; k++){
+          ledOn(*(n9+k));
         }
         break;
       
@@ -350,9 +441,9 @@ void imagen(int n){
         }
         break;
     }
-      
 
 }
+
 
 
 void publik(int SEG){
@@ -371,7 +462,7 @@ void publik(int SEG){
  
     
   	for(int i=0; i< a; i++){
-      imagen(buffer[i]-64);
+      imagen(buffer[i]);
       delay(TIEMPO);
     }
 }

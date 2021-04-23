@@ -262,7 +262,68 @@ Se puso en funcionalidad las lineas de código que hacen interactuar al usuario 
     \caption{Finalización de ejecucion con la entrada HEY}
     \label{ejecucionH}
     \end{figure}
+    
+    El siguiente código muestra el usuario va a interactuar con la consola, se observa que la varaible \textit{ENTRADA} es la que decide a que parte del programa desea ir, entre las opciones está, \textbf{1.} Verficiar el \textit{patron 5},\textbf{ 2.} Verificar si todos los Leds están enceididos,\textbf{ 3.} Ingresar un carácter por teclado para mostrar en el arreglo de leds,\textbf{ 4.} Ingresar una cadena de cáracteres para mostrar en  el arreglo de leds, cada condicional, según la entrada, lleva a otras instrucciones que son quienes ejecutan las procesos sobre el funcionamiento del arreglo\\
 
+
+\begin{lstlisting}[language=arduino, label=pruebaON]
+void verificacion(){ 
+    while(Serial.available()==0){}
+    
+  int ENTRADA = Serial.parseInt(); // lee un entero 
+  Serial.print("Su elecciones fue: ");
+  Serial.println(ENTRADA);
+  
+  
+  
+  if (ENTRADA == 1){
+    // Ingresa a verificar el patron 5 
+    prueba1();
+  }
+  
+  else if(ENTRADA == 2){
+    // Ingresa a realizar la verifiacion
+    // que todos los LEDS esten encnendidos
+    
+    verificacion();
+  }
+  
+  else if(ENTRADA == 3){
+   
+    Serial.println("");
+
+    // pedir al usuario un caracter para ser
+    // visualizado
+    
+    Serial.println("Ingrese un caracter para mostrar el patron: ");
+    while(Serial.available()==0){}
+    
+  	int ENTRADA3 = Serial.read(); // lee ascii 
+  	//Serial.println("Su caracter ingresado fue: ");
+  	//Serial.println(ENTRADA3);
+    
+    imagen(ENTRADA3); // A - > 65  caso 1 = A 65-64 -> 1 
+
+    
+  }
+  
+  if(ENTRADA == 4){
+    // Pide al usuario que le ingrese una palabra para ser
+    // mostrada secuencialmente, el tiempo entre patron y 
+    // patron lo define el usuario y la variable se llama
+    // TIEMPO
+	Serial.println("");
+    Serial.print("Ingrese el tiempo de duracion en segundos: ");
+    while(Serial.available()==0){}
+    int SEGU = Serial.parseInt(); 
+  
+	publik(SEGU);
+    
+  }
+}
+  }
+}
+\end{lstlisting}
 
 \section{Problemas obtenidos}\label{problem}
 En esta sección se habla sobre los errores y problemas que se tuvo a la hora de realizar el desafío, con el fin de ponerlos al conocimiento del estudiantado para aprender a trabajar y solucionar en momentos de crisis, o bajo presión.
