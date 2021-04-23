@@ -2,6 +2,9 @@ const int SER = 2;
 const int RCLK = 3;
 const int SRCLK = 4;
 
+int *cantidad;
+int *p_a;
+
 void ledOn(int); 
 // Enciende los leds de una fila segun la entrada
 // de un numero decimal
@@ -154,295 +157,559 @@ void prueba1(){
 }
 
 
-void verificacion(){ 
-  
+void verificacion(){
+
   /* Funcion que verifica que todos
   los LEDS esten encendidos*/
-  
-  int p2[8] = {255,255,255,255,255,255,255,255};
-  
-  for (int k = 0; k < 8; k++){
-    ledOn(*(p2+k));
-  }
+
+    cantidad = new int[8];
+    
+    cantidad[0] = 60;cantidad[1] = 66; cantidad[2] = 66;
+    cantidad[3] = 60;cantidad[4] = 60; cantidad[5] = 66;
+    cantidad[6] = 66; cantidad[7] = 60;
+    
+
+    for (int i=0; i<8; i++){
+      		ledOn(*(cantidad+i));
+        }
+    
+    delete[] cantidad;
+
 }
+
 
 void imagen(int n){
-  
-  	/*Funcion que recibe como parametro un entero,
-      que representa un caracter y muestra en la 
-      matriz de leds su correspondiente patron
-     */
-     
-  	/* A cada letra del abecedario se le asigna una
-    matriz que en decimal representa un conjunto de arreglos
-    para que dicha letra se vea como un patron en la
-    matriz de LEDS
-    */
-  
-	int vacio[8] = {24,0,24,12,6,102,126,60};      
-    int A[8] = {195,195,195,255,255,195,66,60};
-    int B[8] = {124,66,66,124,124,66,66,124};
-    int C[8] = {126,254,224,224,224,224,254,126};
-    int D[8] = {252,254,99,99,99,99,254,252};
-    int E[8] = {255,255,192,252,252,192,255,255};
-    int F[8] = {192,192,192,252,252,192,255,255};
-    int G[8] = {124,126,194,206,206,192,126,124};
-    int H[8] = {195,195,195,255,255,195,195,195};
-    int I[8] = {255,255,24,24,24,24,255,255};
-    int J[8] = {112,248,24,24,24,24,255,255};
-    int K[8] = {198,204,216,240,240,216,204,198};
-    int L[8] = {254,254,192,192,192,192,192,192};
-  	int M[8] = {195,195,195,219,255,231,195,195};
-  	int N[8] = {195,199,207,223,251,243,227,195};
-  	int O[8] = {60,126,195,195,195,195,126,60};
-  	int P[8] = {192,192,254,255,193,193,255,254};
-    int Q[8] = {1,126,70,74,66,66,126,0};
-  	int R[8] = {204,216,240,252,198,198,254,252};
-  	int S[8] = {60,126,6,62,124,96,126,60};
-  	int T[8] = {24,24,24,24,24,24,255,255};
-  	int U[8] = {255,255,195,195,195,195,195,195};
-  	int V[8] = {24,60,102,195,195,195,195,195};
-  	int W[8] = {60,126,219,219,219,195,195,195};
-    int X[8] = {195,102,60,24,60,102,195,129};
-  	int Y[8] = {24,24,24,24,60,102,195,195};
-    int Z[8] = {255,127,48,24,12,6,255,255};
-	int n0[8] = {126,66,66,66,66,66,66,126};
-	int n1[8] = {255,255,12,12,12,108,60,28};
-	int n2[8] = {126,126,48,24,12,38,62,28};
-	int n3[8] = {124,124,2,28,28,2,124,124};
-	int n4[8] = {6,6,255,198,102,54,30,14};
-	int n5[8] = {124,2,2,2,124,64,64,126};
-	int n6[8] = {60,102,102,102,124,96,98,60};
-	int n7[8] = {4,4,4,63,4,4,4,124};
-	int n8[8] = {60,66,66,60,60,66,66,60};
-	int n9[8] = {126,2,2,126,66,66,66,126};
 
 
-    switch (n) {
 
-    case 65:
-        for (int k = 0; k < 8; k++){
-          ledOn(*(A+k));
-        }
-        break;
-      
-    case 66:
-        for (int k = 0; k < 8; k++){
-          ledOn(*(B+k));
-        }
-        break;
-		
-    case 67:
-        for (int k = 0; k < 8; k++){
-          ledOn(*(C+k));
-        }
-        break;
-		
-    case 68:
-        for (int k = 0; k < 8; k++){
-          ledOn(*(D+k));
-        }
-        break;
-      
-    case 69:
-        for (int k = 0; k < 8; k++){
-          ledOn(*(E+k));
-        }
-        break; 
-      
-    case 70:
-        for (int k = 0; k < 8; k++){
-          ledOn(*(F+k));
-        }
-        break;
-		
-    case 71:
-        for (int k = 0; k < 8; k++){
-          ledOn(*(G+k));
-        }
-        break;
-		
-    case 72:
-        for (int k = 0; k < 8; k++){
-          ledOn(*(H+k));
-        }
-        break;
-		
-    case 73:
-        for (int k = 0; k < 8; k++){
-          ledOn(*(I+k));
-        }
-        break;
-		
-    case 74:
-        for (int k = 0; k < 8; k++){
-          ledOn(*(J+k));
-        }
-        break;
-		
-    case 75:
-        for (int k = 0; k < 8; k++){
-          ledOn(*(K+k));
-        }
-        break;
-		
-    case 76:
-        for (int k = 0; k < 8; k++){
-          ledOn(*(L+k));
-        }
-        break;
-		
-    case 77:
-        for (int k = 0; k < 8; k++){
-          ledOn(*(M+k));
-        }
-        break;
-		
-    case 78:
-        for (int k = 0; k < 8; k++){
-          ledOn(*(N+k));
-        }
-        break;
-		
-    case 79:
-        for (int k = 0; k < 8; k++){
-          ledOn(*(O+k));
-        }
-        break;
-		
-    case 80:
-        for (int k = 0; k < 8; k++){
-          ledOn(*(P+k));
-        }
-        break;
-    
-	case 81:
-        for (int k = 0; k < 8; k++){
-          ledOn(*(Q+k));
-        }
-        break;
-    
-	case 82:
-        for (int k = 0; k < 8; k++){
-          ledOn(*(R+k));
-        }
-        break;
-    
-	case 83:
-        for (int k = 0; k < 8; k++){
-          ledOn(*(S+k));
-        }
-        break;   
-    
-	case 84:
-        for (int k = 0; k < 8; k++){
-          ledOn(*(T+k));
-        }
-        break;    
-    
-	case 85:
-        for (int k = 0; k < 8; k++){
-          ledOn(*(U+k));
-        }
-        break;
-    
-	case 86:
-        for (int k = 0; k < 8; k++){
-          ledOn(*(V+k));
-        }
-        break;
-    
-	case 87:
-        for (int k = 0; k < 8; k++){
-          ledOn(*(W+k));
-        }
-        break;
-    
-	case 88:
-        for (int k = 0; k < 8; k++){
-          ledOn(*(X+k));
-        }
-        break;
-    
-	case 89:
-        for (int k = 0; k < 8; k++){
-          ledOn(*(Y+k));
-        }
-        break;
-    
-	case 90:
-        for (int k = 0; k < 8; k++){
-          ledOn(*(Z+k));
-        }
-        break;
-    
-	case 48:
-        for (int k = 0; k < 8; k++){
-          ledOn(*(n0+k));
-        }
-        break;
-		
-	case 49:
-        for (int k = 0; k < 8; k++){
-          ledOn(*(n1+k));
-        }
-        break;
-		
-	case 50:
-        for (int k = 0; k < 8; k++){
-          ledOn(*(n2+k));
-        }
-        break;
-		
-	case 51:
-        for (int k = 0; k < 8; k++){
-          ledOn(*(n3+k));
-        }
-        break;
 	
-	case 52:
-        for (int k = 0; k < 8; k++){
-          ledOn(*(n4+k));
-        }
-        break;
-      	case 53:
-        for (int k = 0; k < 8; k++){
-          ledOn(*(n5+k));
-        }
-        break;
+	if (n == 65 || n == 97) {
 		
-	case 54:
-        for (int k = 0; k < 8; k++){
-          ledOn(*(n6+k));
-        }
-        break;
+		p_a = new int[8];
+		p_a[0] = 195; p_a[1] = 195; p_a[2] = 195;
+		p_a[3] = 255; p_a[4] = 255; p_a[5] = 195;
+		p_a[6] = 66; p_a[7] = 60;
 		
-	case 55:
-        for (int k = 0; k < 8; k++){
-          ledOn(*(n7+k));
+		for (int i=0; i<8; i++){
+			ledOn(*(p_a+i));
         }
-        break;
 		
-	case 56:
-        for (int k = 0; k < 8; k++){
-          ledOn(*(n8+k));
-        }
-        break;
+		delete[] p_a;	
+	}
+	
+	else if (n == 66 || n == 98) {
 		
-	case 57:
-        for (int k = 0; k < 8; k++){
-          ledOn(*(n9+k));
+		p_a = new int[8];
+		p_a[0] = 124; p_a[1] = 66; p_a[2] = 66;
+		p_a[3] = 124; p_a[4] = 124; p_a[5] = 66;
+		p_a[6] = 66; p_a[7] = 124;
+		
+		for (int i=0; i<8; i++){
+			ledOn(*(p_a+i));
         }
-        break;
-      
-    default :
-        for (int k = 0; k < 8; k++){
-          ledOn(*(vacio+k));
+		
+		delete[] p_a;	
+	}
+	
+	else if (n == 67 || n == 99) {
+		
+		p_a = new int[8];
+		p_a[0] = 126; p_a[1] = 254; p_a[2] = 224;
+		p_a[3] = 224; p_a[4] = 224; p_a[5] = 224;
+		p_a[6] = 254; p_a[7] = 126;
+		
+		for (int i=0; i<8; i++){
+			ledOn(*(p_a+i));
         }
-        break;
-    }
+		
+		delete[] p_a;	
+	}
 
+	else if (n == 68 || n == 100) {
+		
+		p_a = new int[8];
+		p_a[0] = 252; p_a[1] = 254; p_a[2] = 99;
+		p_a[3] = 99; p_a[4] = 99; p_a[5] = 99;
+		p_a[6] = 254; p_a[7] = 252;
+		
+		for (int i=0; i<8; i++){
+			ledOn(*(p_a+i));
+        }
+		
+		delete[] p_a;	
+	}
+
+	else if (n == 69 || n == 101) {
+		
+		p_a = new int[8];
+		p_a[0] = 255; p_a[1] = 255; p_a[2] = 192;
+		p_a[3] = 252; p_a[4] = 252; p_a[5] = 192;
+		p_a[6] = 255; p_a[7] = 255;
+		
+		for (int i=0; i<8; i++){
+			ledOn(*(p_a+i));
+        }
+		
+		delete[] p_a;	
+	}	
+	
+	else if (n == 70 || n == 102) {
+		
+		p_a = new int[8];
+		p_a[0] = 192; p_a[1] = 192; p_a[2] = 192;
+		p_a[3] = 252; p_a[4] = 252; p_a[5] = 192;
+		p_a[6] = 255; p_a[7] = 255;
+		
+		for (int i=0; i<8; i++){
+			ledOn(*(p_a+i));
+        }
+		
+		delete[] p_a;	
+	}
+	
+	else if (n == 71 || n == 103) {
+		
+		p_a = new int[8];
+		p_a[0] = 124; p_a[1] = 126; p_a[2] = 194;
+		p_a[3] = 206; p_a[4] = 206; p_a[5] = 192;
+		p_a[6] = 126; p_a[7] = 124;
+		
+		for (int i=0; i<8; i++){
+			ledOn(*(p_a+i));
+        }
+		
+		delete[] p_a;	
+	}
+
+	else if (n == 72 || n == 104) {
+		
+		p_a = new int[8];
+		p_a[0] = 195; p_a[1] = 195; p_a[2] = 195;
+		p_a[3] = 255; p_a[4] = 255; p_a[5] = 195;
+		p_a[6] = 195; p_a[7] = 195;
+		
+		for (int i=0; i<8; i++){
+			ledOn(*(p_a+i));
+        }
+		
+		delete[] p_a;	
+	}
+	
+	else if (n == 73 || n == 105) {
+		
+		p_a = new int[8];
+		p_a[0] = 255; p_a[1] = 255; p_a[2] = 24;
+		p_a[3] = 24; p_a[4] = 24; p_a[5] = 24;
+		p_a[6] = 255; p_a[7] = 255;
+		
+		for (int i=0; i<8; i++){
+			ledOn(*(p_a+i));
+        }
+		
+		delete[] p_a;	
+	}
+
+	else if (n == 74 || n == 106) {
+		
+		p_a = new int[8];
+		p_a[0] = 112; p_a[1] = 248; p_a[2] = 24;
+		p_a[3] = 24; p_a[4] = 24; p_a[5] = 24;
+		p_a[6] = 255; p_a[7] = 255;
+		
+		for (int i=0; i<8; i++){
+			ledOn(*(p_a+i));
+        }
+		
+		delete[] p_a;	
+	}
+	
+	else if (n == 75 || n == 107) {
+		
+		p_a = new int[8];
+		p_a[0] = 198; p_a[1] = 204; p_a[2] = 216;
+		p_a[3] = 240; p_a[4] = 240; p_a[5] = 216;
+		p_a[6] = 204; p_a[7] = 198;
+		
+		for (int i=0; i<8; i++){
+			ledOn(*(p_a+i));
+        }
+		
+		delete[] p_a;	
+	}
+	
+	else if (n == 76 || n == 108) {
+		
+		p_a = new int[8];
+		p_a[0] = 254; p_a[1] = 254; p_a[2] = 192;
+		p_a[3] = 192; p_a[4] = 192; p_a[5] = 192;
+		p_a[6] = 192; p_a[7] = 192;
+		
+		for (int i=0; i<8; i++){
+			ledOn(*(p_a+i));
+        }
+		
+		delete[] p_a;	
+	}
+	
+	else if (n == 77 || n == 109) {
+		
+		p_a = new int[8];
+		p_a[0] = 195; p_a[1] = 195; p_a[2] = 195;
+		p_a[3] = 219; p_a[4] = 255; p_a[5] = 231;
+		p_a[6] = 195; p_a[7] = 195;
+		
+		for (int i=0; i<8; i++){
+			ledOn(*(p_a+i));
+        }
+		
+		delete[] p_a;	
+	}
+	
+	else if (n == 78 || n == 110) {
+		
+		p_a = new int[8];
+		p_a[0] = 195; p_a[1] = 199; p_a[2] = 207;
+		p_a[3] = 223; p_a[4] = 251; p_a[5] = 243;
+		p_a[6] = 227; p_a[7] = 195;
+		
+		for (int i=0; i<8; i++){
+			ledOn(*(p_a+i));
+        }
+		
+		delete[] p_a;	
+	}
+	
+	else if (n == 79 || n == 111) {
+		
+		p_a = new int[8];
+		p_a[0] = 60; p_a[1] = 126; p_a[2] = 195;
+		p_a[3] = 195; p_a[4] = 195; p_a[5] = 195;
+		p_a[6] = 126; p_a[7] = 60;
+		
+		for (int i=0; i<8; i++){
+			ledOn(*(p_a+i));
+        }
+		
+		delete[] p_a;	
+	}
+	
+  else if (n == 80 || n == 112) {
+		//Letra P o p
+		p_a = new int[8];
+		p_a[0] = 192; p_a[1] = 192; p_a[2] = 254;
+		p_a[3] = 255; p_a[4] = 193; p_a[5] = 193;
+		p_a[6] = 255; p_a[7] = 254;
+		
+		for (int i=0; i<8; i++){
+			ledOn(*(p_a+i));
+        }
+		
+		delete[] p_a;	
+	}
+	
+		else if (n == 81 || n == 113) {
+		//Letra Q o q
+		p_a = new int[8];
+		p_a[0] = 1; p_a[1] = 126; p_a[2] = 70;
+		p_a[3] = 74; p_a[4] = 66; p_a[5] = 66;
+		p_a[6] = 126; p_a[7] = 0;
+		
+		for (int i=0; i<8; i++){
+			ledOn(*(p_a+i));
+        }
+		
+		delete[] p_a;	
+	}
+	
+		else if (n == 82 || n == 114) {
+		//Letra R p r
+		p_a = new int[8];
+		p_a[0] = 204; p_a[1] = 216; p_a[2] = 240;
+		p_a[3] = 252; p_a[4] = 198; p_a[5] = 198;
+		p_a[6] = 254; p_a[7] = 252;
+		
+		for (int i=0; i<8; i++){
+			ledOn(*(p_a+i));
+        }
+		
+		delete[] p_a;	
+	}
+	
+		else if (n == 83 || n == 115) {
+		//letra S o s
+		p_a = new int[8];
+		p_a[0] = 60; p_a[1] = 126; p_a[2] = 6;
+		p_a[3] = 62; p_a[4] = 124; p_a[5] = 96;
+		p_a[6] = 126; p_a[7] = 60;
+		
+		for (int i=0; i<8; i++){
+			ledOn(*(p_a+i));
+        }
+		
+		delete[] p_a;	
+	}
+	
+		else if (n == 84 || n == 116) {
+		//Letra T o t 
+		p_a = new int[8];
+		p_a[0] = 24; p_a[1] = 24; p_a[2] = 24;
+		p_a[3] = 24; p_a[4] = 24; p_a[5] = 24;
+		p_a[6] = 255; p_a[7] = 255;
+		
+		for (int i=0; i<8; i++){
+			ledOn(*(p_a+i));
+        }
+		
+		delete[] p_a;	
+	}
+	  	
+		else if (n == 85 || n == 117) {
+		//letra U 
+		p_a = new int[8];
+		p_a[0] = 255 ; p_a[1] = 255; p_a[2] = 195;
+		p_a[3] = 195; p_a[4] = 195; p_a[5] =195;
+		p_a[6] = 195; p_a[7] =195;
+		
+		for (int i=0; i<8; i++){
+			ledOn(*(p_a+i));
+        }
+		
+		delete[] p_a;	
+	}
+	
+		else if (n == 86 || n == 118) {
+		//letra V v
+		p_a = new int[8];
+		p_a[0] = 24; p_a[1] = 60; p_a[2] = 102;
+		p_a[3] = 195; p_a[4] = 195; p_a[5] =195;
+		p_a[6] = 195; p_a[7] =195;
+		
+		for (int i=0; i<8; i++){
+			ledOn(*(p_a+i));
+        }
+		
+		delete[] p_a;	
+	}
+	
+		else if (n == 87 || n == 119) {
+		//letra w W
+		p_a = new int[8];
+		p_a[0] = 60; p_a[1] = 126; p_a[2] = 219;
+		p_a[3] = 219; p_a[4] = 219; p_a[5] = 195;
+		p_a[6] = 195; p_a[7] = 195;
+		
+		for (int i=0; i<8; i++){
+			ledOn(*(p_a+i));
+        }
+		
+		delete[] p_a;	
+	}
+	
+		else if (n == 88 || n == 120) {
+		//letra x o X
+		p_a = new int[8];
+		p_a[0] = 195; p_a[1] = 102; p_a[2] = 60;
+		p_a[3] = 24; p_a[4] = 60; p_a[5] = 102;
+		p_a[6] = 195; p_a[7] = 129;
+		
+		for (int i=0; i<8; i++){
+			ledOn(*(p_a+i));
+        }
+		
+		delete[] p_a;	
+		
+	}
+  
+  		else if (n == 89 || n == 121) {
+		//letra y o Y
+		p_a = new int[8];
+		p_a[0] = 24; p_a[1] = 24; p_a[2] = 24;
+		p_a[3] = 24; p_a[4] = 60; p_a[5] = 102;
+		p_a[6] = 195; p_a[7] = 195;
+		
+		for (int i=0; i<8; i++){
+			ledOn(*(p_a+i));
+        }
+		
+		delete[] p_a;	
+		
+	}
+  
+  
+		else if (n == 90 || n == 122) {
+		//letra z Z
+
+		p_a = new int[8];
+		p_a[0] = 255; p_a[1] = 127; p_a[2] = 48;
+		p_a[3] = 24; p_a[4] = 12; p_a[5] = 6;
+		p_a[6] = 255; p_a[7] = 255;
+		
+		for (int i=0; i<8; i++){
+			ledOn(*(p_a+i));
+        }
+		
+		delete[] p_a;
+	}	
+  
+  
+  
+	// numeros 
+	
+	else if (n == 48) {
+		
+		p_a = new int[8];
+		p_a[0] = 126; p_a[1] = 66; p_a[2] = 66;
+		p_a[3] = 66; p_a[4] = 66; p_a[5] = 66;
+		p_a[6] = 66; p_a[7] = 126;
+		
+		for (int i=0; i<8; i++){
+			ledOn(*(p_a+i));
+        }
+		
+		delete[] p_a;	
+	}
+
+	else if (n == 49) {
+		
+		p_a = new int[8];
+		p_a[0] = 255; p_a[1] = 255; p_a[2] = 12;
+		p_a[3] = 12; p_a[4] = 12; p_a[5] = 108;
+		p_a[6] = 60; p_a[7] = 28;
+		
+		for (int i=0; i<8; i++){
+			ledOn(*(p_a+i));
+        }
+		
+		delete[] p_a;	
+	}
+	
+	else if (n == 50 ) {
+		
+		p_a = new int[8];
+		p_a[0] = 126; p_a[1] = 126; p_a[2] = 48;
+		p_a[3] = 24; p_a[4] = 12; p_a[5] = 38;
+		p_a[6] = 62; p_a[7] = 28;
+		
+		for (int i=0; i<8; i++){
+			ledOn(*(p_a+i));
+        }
+		
+		delete[] p_a;	
+	}
+	
+	else if (n == 51 ) {
+		
+		p_a = new int[8];
+		p_a[0] = 124; p_a[1] = 124; p_a[2] = 2;
+		p_a[3] = 28; p_a[4] = 28; p_a[5] = 2;
+		p_a[6] = 124; p_a[7] = 124;
+		
+		for (int i=0; i<8; i++){
+			ledOn(*(p_a+i));
+        }
+		
+		delete[] p_a;	
+	}
+	
+	else if (n == 52 ) {
+		
+		p_a = new int[8];
+		p_a[0] = 6; p_a[1] = 6; p_a[2] = 255;
+		p_a[3] = 198; p_a[4] = 102; p_a[5] = 54;
+		p_a[6] = 30; p_a[7] = 14;
+		
+		for (int i=0; i<8; i++){
+			ledOn(*(p_a+i));
+        }
+		
+		delete[] p_a;	
+	}
+	else if (n == 53 ) {
+		
+		p_a = new int[8];
+		p_a[0] = 124; p_a[1] = 2; p_a[2] = 2;
+		p_a[3] = 2; p_a[4] = 124; p_a[5] = 64;
+		p_a[6] = 64; p_a[7] = 126;
+		
+		for (int i=0; i<8; i++){
+			ledOn(*(p_a+i));
+        }
+		
+		delete[] p_a;	
+	}
+  
+	else if (n == 54 ) {
+		
+		p_a = new int[8];
+		p_a[0] = 60; p_a[1] = 102; p_a[2] = 102;
+		p_a[3] = 102; p_a[4] =124; p_a[5] = 96;
+		p_a[6] = 98; p_a[7] = 60;
+		
+		for (int i=0; i<8; i++){
+			ledOn(*(p_a+i));
+        }
+		
+		delete[] p_a;	
+	}
+  	else if (n == 55 ) {
+		
+		p_a = new int[8];
+		p_a[0] = 4; p_a[1] = 4; p_a[2] = 4;
+		p_a[3] = 63; p_a[4] = 4; p_a[5] = 4;
+		p_a[6] = 4; p_a[7] = 124;
+      
+		for (int i=0; i<8; i++){
+			ledOn(*(p_a+i));
+        }
+		
+		delete[] p_a;	
+	}
+    else if (n == 56 ) {
+		
+		p_a = new int[8];
+		p_a[0] = 60; p_a[1] = 66; p_a[2] = 66;
+		p_a[3] = 60; p_a[4] = 60; p_a[5] = 66;
+		p_a[6] = 66; p_a[7] = 60;
+      
+		for (int i=0; i<8; i++){
+			ledOn(*(p_a+i));
+        }
+		
+		delete[] p_a;	
+	}
+  
+    else if (n == 57 ) {
+		
+		p_a = new int[8];
+		p_a[0] = 126; p_a[1] = 2; p_a[2] = 2;
+		p_a[3] = 126; p_a[4] = 66; p_a[5] = 66;
+		p_a[6] = 66; p_a[7] = 126;
+		
+      
+		for (int i=0; i<8; i++){
+			ledOn(*(p_a+i));
+        }
+		
+		delete[] p_a;	
+	}
+    else {
+		
+		p_a = new int[8];
+		p_a[0] = 24; p_a[1] = 0; p_a[2] = 24;
+		p_a[3] = 12; p_a[4] = 6; p_a[5] = 102;
+		p_a[6] = 126; p_a[7] = 60;
+		
+      
+		for (int i=0; i<8; i++){
+			ledOn(*(p_a+i));
+        }
+		
+		delete[] p_a;	
+	}
+  
 }
+
+
 
 
 
